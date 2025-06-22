@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOZI - Đặt xe dễ dàng, khám phá Huế</title>
+    <link rel="stylesheet" href="CSS/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="hamburger-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="logo">
+                <img src="img/img1.jpg" alt="GOZI Logo"> </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="search.html">Tìm xe</a></li>
+                    <li><a href="#">Cho thuê xe</a></li>
+                    <li><a href="#">Hỗ trợ</a></li>
+                    <li><a href="index.html" class="btn-auth">Đăng xuất</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner-slider-section">
+        <div class="container slider-container">
+            <div class="slider-wrapper">
+                <div class="slider-content">
+                    <img src="img/img0.jpg" alt="Banner giới thiệu dịch vụ 1">
+                    <img src="img/banner2.jpg" alt="Banner giới thiệu dịch vụ 2"> 
+                    <img src="img/banner3.jpg" alt="Banner giới thiệu dịch vụ 3"> 
+                </div>
+                <button class="slider-arrow prev-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-arrow next-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots">
+                <span class="nav-dot active" data-slide="0"></span>
+                <span class="nav-dot" data-slide="1"></span>
+                <span class="nav-dot" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-search-section">
+        <div class="container">
+            <div class="search-bar-elements">
+                <div class="search-input-group">
+                    <label for="car-type">Loại xe</label> 
+                    <select id="car-type">
+                        <option value="">Chọn loại xe</option>
+                        <option value="scooter">Xe ga</option>
+                        <option value="manual">Xe số</option>
+                        <option value="electric">Xe điện</option>
+                    </select>
+                </div>
+                <div class="search-input-group">
+                    <label for="location">Vị trí</label> 
+                    <input type="text" id="location" placeholder="Điểm đón">
+                </div>
+                <div class="search-input-group">
+                    <label for="time">Thời gian</label> 
+                    <input type="text" id="time" placeholder="Ngày/Giờ">
+                </div>
+                <a href="search.html">
+                    <button class="btn-primary search-button">Tìm kiếm</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-vehicles">
+        <div class="container">
+            <h2>Xe nổi bật tại Huế <span class="arrow-icon"></span></h2> 
+            <div class="vehicle-list">
+
+                <div class="vehicle-item">
+                    <a href="login.html">
+                    <img src="img/vision.png" alt="Xe Honda Vision">
+                    </a>
+                    <p class="vehicle-name">Honda Vision</p>
+                    <p class="price">150.000đ/ngày</p> 
+                </div>
+
+                <div class="vehicle-item">
+                    <a href="login.html">
+                    <img src="img/vision.png" alt="Xe Yamaha Exciter">
+                    </a>
+                    <p class="vehicle-name">Yamaha Exciter</p>
+                    <p class="price">150.000đ/ngày</p> 
+                </div>
+
+                <div class="vehicle-item">
+                    <a href="login.html">
+                    <img src="img/blade.jpg" alt="Xe ga Air Blade">
+                    </a>
+                    <p class="vehicle-name">Air Blade</p>
+                    <p class="price">150.000đ/ngày</p> 
+                </div>
+
+                <div class="vehicle-item">
+                    <a href="login.html">
+                    <img src="img/sirius.jpg" alt="Xe Số Sirius">
+                    </a>
+                    <p class="vehicle-name">Sirius</p>
+                    <p class="price">150.000đ/ngày</p> 
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="info-sections">
+        <div class="container">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Hướng dẫn thuê xe</h3> 
+                    <p>Nội dung hướng dẫn thuê xe của GOZI, giúp khách hàng dễ dàng làm quen với quy trình thuê.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Ưu điểm nền tảng</h3> 
+                    <p>Khám phá những lợi ích nổi bật khi sử dụng dịch vụ của GOZI, từ sự đa dạng xe đến hỗ trợ 24/7.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="user-reviews-section">
+        <div class="container">
+            <h2>Đánh giá người dùng thực tế</h2> 
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p class="quote">“</p>
+                    <div class="review-text">
+                        <p>Dịch vụ rất tuyệt vời, xe mới và sạch sẽ. Chủ xe nhiệt tình hỗ trợ. Chắc chắn sẽ sử dụng lại!</p>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <p class="quote">“</p>
+                    <div class="review-text">
+                        <p>Thao tác đặt xe nhanh chóng, tiện lợi. Rất hài lòng với chuyến đi của mình tại Huế nhờ GOZI.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h3>GOZI</h3> 
+                    <ul>
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                        <li><a href="#">Tin tức</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Hỗ trợ khách hàng</h3>
+                    <ul>
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">Liên hệ CSKH</a></li> 
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Chính sách</h3>
+                    <ul>
+                        <li><a href="#">Chính sách bảo mật</a></li> 
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Kết nối với chúng tôi</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 GOZI. Mọi quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lấy các nút tab và nội dung tab (nếu bạn có)
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.add('hidden'));
+
+                    button.classList.add('active');
+                    document.getElementById(`tab-${button.dataset.tab}`).classList.remove('hidden');
+                });
+            });
+
+            // Chức năng cho hamburger menu (đã có từ trước)
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mainNav = document.querySelector('.main-nav');
+
+            hamburgerMenu.addEventListener('click', () => {
+                mainNav.classList.toggle('nav-open');
+            });
+
+            // ---------- JavaScript cho Slider Banner mới ----------
+            const sliderContent = document.querySelector('.slider-content');
+            const navDots = document.querySelectorAll('.nav-dot');
+            const prevArrow = document.querySelector('.prev-arrow');
+            const nextArrow = document.querySelector('.next-arrow');
+            const totalSlides = document.querySelectorAll('.slider-content img').length;
+            let currentIndex = 0;
+            let slideInterval;
+
+            function goToSlide(index) {
+                if (index < 0) {
+                    index = totalSlides - 1; // Về slide cuối nếu đi lùi từ slide đầu
+                } else if (index >= totalSlides) {
+                    index = 0; // Về slide đầu nếu đi tới từ slide cuối
+                }
+                currentIndex = index;
+                const offset = -currentIndex * 100; // Mỗi slide chiếm 100% chiều rộng của container
+                sliderContent.style.transform = `translateX(${offset}%)`;
+
+                // Cập nhật trạng thái active của chấm điều hướng
+                navDots.forEach(dot => dot.classList.remove('active'));
+                navDots[currentIndex].classList.add('active');
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            function startAutoplay() {
+                slideInterval = setInterval(nextSlide, 2000); // Tự động chuyển slide mỗi 3 giây
+            }
+
+            function stopAutoplay() {
+                clearInterval(slideInterval);
+            }
+
+            // Gán sự kiện cho các nút mũi tên
+            prevArrow.addEventListener('click', () => {
+                stopAutoplay(); // Dừng autoplay khi người dùng tương tác
+                prevSlide();
+                startAutoplay(); // Khởi động lại autoplay
+            });
+
+            nextArrow.addEventListener('click', () => {
+                stopAutoplay();
+                nextSlide();
+                startAutoplay();
+            });
+
+            // Gán sự kiện cho các chấm điều hướng
+            navDots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    stopAutoplay();
+                    const slideIndex = parseInt(e.target.dataset.slide); // Lấy index từ data-slide
+                    goToSlide(slideIndex);
+                    startAutoplay();
+                });
+            });
+
+            // Bắt đầu autoplay khi trang tải xong
+            startAutoplay();
+
+            // Tùy chọn: Dừng autoplay khi di chuột vào slider và tiếp tục khi rời đi
+            sliderContent.addEventListener('mouseenter', stopAutoplay);
+            sliderContent.addEventListener('mouseleave', startAutoplay);
+            // ----------------------------------------------------
+        });
+    </script>
+</body>
+</html>
