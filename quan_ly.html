@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản Lý của Chủ Xe - GoZI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="CSS/quan_ly.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="logo">GoZI</a>
+                <button class="toggle-sidebar-btn" id="toggleSidebarBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="main-menu">
+                <ul>
+                    <li class="menu-item active" data-content="vehicle-list">
+                        <i class="fas fa-car"></i> Danh sách xe
+                    </li>
+                    <li class="menu-item" data-content="bookings">
+                        <i class="fas fa-calendar-alt"></i> Lịch đặt
+                    </li>
+                    <li class="menu-item" data-content="revenue">
+                        <i class="fas fa-chart-line"></i> Doanh thu
+                    </li>
+                    <li class="menu-item" data-content="customer-reviews">
+                        <i class="fas fa-star"></i> Đánh giá từ khách
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="main-content-header">
+                <h2>Trang quản lý của chủ xe</h2>
+            </div>
+
+            <section id="vehicle-list" class="dashboard-section active">
+                <div class="section-header">
+                    <h3>Danh sách xe đã đăng</h3>
+                    <button class="add-vehicle-btn"><i class="fas fa-plus"></i> Thêm xe mới</button>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tên xe</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vehicleTableBody">
+                            </tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    </div>
+            </section>
+
+            <section id="bookings" class="dashboard-section">
+                <h3>Lịch đặt</h3>
+                <p>Nội dung lịch đặt sẽ hiển thị ở đây.</p>
+            </section>
+
+            <section id="revenue" class="dashboard-section">
+                <h3>Doanh thu</h3>
+                <p>Nội dung doanh thu sẽ hiển thị ở đây.</p>
+            </section>
+
+            <section id="customer-reviews" class="dashboard-section">
+                <h3>Đánh giá từ khách</h3>
+                <p>Nội dung đánh giá từ khách sẽ hiển thị ở đây.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="Script/quan_ly.js"></script>
+</body>
+</html>

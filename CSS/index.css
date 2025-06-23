@@ -1,12 +1,15 @@
-
 :root {
-    --primary-color: #FFD700; 
-    --secondary-color: #800080; 
+    --primary-color: #FFD700; /* Vàng */
+    --secondary-color: #800080; /* Xanh lá cây tươi mới */
+    --dark-secondary-color: #660466; /* Xanh lá cây đậm hơn */
     --text-color: #333;
-    --light-bg: #f5f5f5;
-    --dark-bg: #eee;
-    --border-color: #ddd;
-    --accent-color: #32CD32; 
+    --light-bg: #f9f9f9;
+    --dark-bg: #f0f0f0;
+    --border-color: #e0e0e0;
+    --accent-color: #800080; /* Xanh dương cho các nút nổi bật */
+    --light-blue: #BBDEFB; /* Xanh dương nhạt */
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 body {
@@ -16,19 +19,33 @@ body {
     box-sizing: border-box;
     color: var(--text-color);
     line-height: 1.6;
+    background-color: var(--light-bg);
 }
 
-
+/* Base Styles & Utilities */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit; /* Kế thừa màu từ cha */
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+/* Header */
 .main-header {
     background-color: #fff;
     padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-light);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -41,7 +58,11 @@ body {
 }
 
 .main-header .logo img {
-    height: 45px;
+    height: 50px; /* Tăng kích thước logo một chút */
+    transition: transform 0.3s ease;
+}
+.main-header .logo img:hover {
+    transform: scale(1.05);
 }
 
 .main-nav ul {
@@ -53,75 +74,200 @@ body {
 }
 
 .main-nav ul li {
-    margin-left: 30px;
+    margin-left: 40px; /* Tăng khoảng cách giữa các mục menu */
 }
 
 .main-nav ul li a {
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.2s ease;
+    padding: 5px 0; /* Thêm padding cho vùng click rộng hơn */
+    position: relative; /* Dùng cho hiệu ứng gạch chân */
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.main-nav ul li a:hover::after {
+    width: 100%;
 }
 
 .main-nav ul li a:hover {
-    color: var(--accent-color);
+    color: var(--secondary-color);
+    transform: translateY(-2px);
 }
 
 .main-nav .btn-auth {
-    background-color: var(--secondary-color);
+    background-color: var(--accent-color); /* Đổi màu nút đăng nhập */
     color: #fff;
-    padding: 8px 18px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    padding: 10px 22px; /* Tăng padding */
+    border-radius: 25px; /* Bo tròn nút hơn */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     font-weight: normal;
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3); /* Thêm đổ bóng */
 }
 
 .main-nav .btn-auth:hover {
-    background-color: #6a006a;
+    background-color: #b623b6; /* Màu đậm hơn khi hover */
     color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(33, 150, 243, 0.4);
 }
-
 
 .hamburger-menu {
     display: none; 
-    font-size: 1.8em;
+    font-size: 2em; /* Tăng kích thước icon */
     color: var(--text-color);
     cursor: pointer;
-    margin-right: 20px; 
+    margin-right: 0; /* Bỏ margin để căn chỉnh tốt hơn */
 }
 
+/* Banner Slider Section */
+.banner-slider-section {
+    background-color: var(--dark-bg);
+    padding: 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    height: 80vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.banner-section {
-    background-color: var(--dark-bg); 
-    padding: 20px 0;
+.slider-container {
+    width: 100%;
+    max-width: 1400px; /* Tăng độ rộng tối đa cho slider */
+    height: 100%;
+    position: relative;
+    border-radius: 15px; /* Bo tròn các góc của slider */
+    overflow: hidden; /* Đảm bảo hình ảnh không tràn ra ngoài */
+    box-shadow: var(--shadow-medium);
+}
+
+.slider-wrapper {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-content {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth transition */
+    height: 100%;
+}
+
+.slider-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    flex-shrink: 0;
+    display: block;
+}
+
+/* Slider Navigation Arrows */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4); /* Hơi trong suốt */
+    color: #fff;
+    border: none;
+    padding: 15px; /* Tăng padding */
+    cursor: pointer;
+    font-size: 1.8em; /* Tăng kích thước icon */
+    border-radius: 50%;
+    z-index: 10;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px; /* Đảm bảo hình tròn hoàn hảo */
+    height: 50px;
+}
+
+.slider-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.prev-arrow {
+    left: 25px; /* Di chuyển vào trong hơn */
+}
+
+.next-arrow {
+    right: 25px; /* Di chuyển vào trong hơn */
+}
+
+/* Navigation Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 20px; /* Kéo lên cao hơn một chút */
+    width: 100%;
     text-align: center;
 }
 
-.banner-section img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.nav-dot {
+    display: inline-block;
+    width: 14px; /* Tăng kích thước chấm */
+    height: 14px;
+    margin: 0 8px; /* Tăng khoảng cách giữa các chấm */
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6); /* Trắng trong suốt */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Thêm viền nhẹ */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.nav-dot.active {
+    background-color: var(--secondary-color); /* Màu xanh lá cây khi active */
+    transform: scale(1.2);
+    border-color: var(--secondary-color);
+}
+.nav-dot:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
 
+/* Quick Search Section */
 .quick-search-section {
-    background-color: #fff;
-    padding: 30px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    margin-bottom: 40px;
+    background: linear-gradient(to right, var(--secondary-color), var(--dark-secondary-color)); /* Gradient background */
+    padding: 40px 0; /* Tăng padding */
+    box-shadow: var(--shadow-medium);
+    margin-top: -80px; /* Kéo lên đè lên banner một chút */
+    position: relative;
+    z-index: 10;
+    border-radius: 15px; /* Bo tròn các góc */
+    transform: translateY(-50px); /* Dịch lên để tạo hiệu ứng nổi bật */
 }
 
 .quick-search-section .container {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .search-bar-elements {
     display: flex;
     align-items: flex-end;
-    gap: 60px; 
+    gap: 30px; /* Giảm khoảng cách giữa các trường input */
     flex-wrap: wrap; 
+    background-color: #fff;
+    padding: 30px; /* Thêm padding cho search bar */
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    justify-content: space-between; /* Căn chỉnh các phần tử tốt hơn */
 }
 
 .search-input-group {
@@ -134,189 +280,270 @@ body {
 .search-input-group label {
     font-size: 0.9em;
     color: #666;
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* Tăng khoảng cách */
+    font-weight: 500;
 }
 
 .search-input-group select,
 .search-input-group input {
     width: 100%;
-    padding: 10px 15px;
+    padding: 12px 18px; /* Tăng padding */
     border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border-radius: 8px; /* Bo tròn hơn */
     font-size: 1em;
+    background-color: var(--light-bg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search-input-group select:focus,
+.search-input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
 }
 
 .search-button {
-    padding: 10px 25px;
+    padding: 12px 30px; /* Tăng padding */
     background-color: var(--accent-color);
     color: #fff;
     border: none;
-    border-radius: 5px;
-    font-size: 1em;
+    border-radius: 8px; /* Bo tròn hơn */
+    font-size: 1.1em; /* Tăng kích thước chữ */
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    align-self: flex-end; /* Căn chỉnh với các input */
+    min-width: 150px; /* Đảm bảo nút đủ rộng */
 }
 
 .search-button:hover {
-    background-color: #28a745;
+    background-color: #b623b6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(33, 150, 243, 0.4);
 }
 
 
+/* Featured Vehicles Section */
 .featured-vehicles {
-    padding: 50px 0;
+    padding: 80px 0; /* Tăng padding trên dưới */
     text-align: center;
     background-color: var(--light-bg);
 }
 
 .featured-vehicles h2 {
-    font-size: 2.2em;
-    color: var(--secondary-color);
-    margin-bottom: 30px;
+    font-size: 2.8em; /* Tăng kích thước tiêu đề */
+    color: var(--dark-secondary-color); /* Màu xanh đậm hơn */
+    margin-bottom: 40px; /* Tăng khoảng cách */
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .featured-vehicles h2 .arrow-icon {
-    font-size: 1.2em;
+    font-size: 0.8em; /* Giảm kích thước mũi tên một chút */
     margin-left: 10px;
-    color: #666;
+    color: var(--primary-color); /* Đổi màu mũi tên */
+    animation: bounceArrow 1.5s infinite; /* Thêm animation */
+}
+
+@keyframes bounceArrow {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
 }
 
 .vehicle-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Tăng min-width */
+    gap: 30px; /* Tăng khoảng cách */
 }
 
 .vehicle-item {
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px; /* Bo tròn nhiều hơn */
+    box-shadow: var(--shadow-light);
     overflow: hidden;
     text-align: center;
-    padding-bottom: 15px;
-    transition: transform 0.2s ease;
+    padding: 20px; /* Thêm padding bên trong */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Dùng flexbox để căn chỉnh nội dung */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .vehicle-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); /* Dịch chuyển lên cao hơn khi hover */
+    box-shadow: var(--shadow-medium);
 }
 
 .vehicle-item img {
-    width: 100px;
-    height: 100px;
+    width: 120px; /* Tăng kích thước ảnh xe */
+    height: 120px;
     object-fit: contain;
     display: block;
-    margin: 20px auto 10px auto;
+    margin: 10px auto 15px auto; /* Điều chỉnh margin */
+}
+
+.vehicle-name {
+    font-weight: 700; /* Đậm hơn */
+    margin: 10px 0 5px;
+    font-size: 1.2em; /* To hơn */
+    color: var(--text-color);
 }
 
 .vehicle-item .price {
-    color: var(--accent-color);
+    color: var(--dark-secondary-color); /* Màu xanh đậm cho giá */
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.25em; /* To hơn nữa */
     margin: 0;
+    padding-top: 10px; /* Khoảng cách với tên xe */
+    border-top: 1px dashed var(--border-color); /* Thêm đường gạch ngang nhẹ */
+    width: 80%; /* Chiếm 80% chiều rộng của item */
 }
 
 
+/* Info Sections */
 .info-sections {
-    padding: 50px 0;
-    background-color: #fff;
+    padding: 80px 0;
+    background-color: var(--dark-bg);
 }
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Điều chỉnh min-width */
+    gap: 40px; /* Tăng khoảng cách */
 }
 
 .info-card {
-    background-color: var(--light-bg);
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 35px; /* Tăng padding */
+    box-shadow: var(--shadow-light);
+    text-align: center; /* Căn giữa nội dung */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
 .info-card h3 {
     color: var(--secondary-color);
-    font-size: 1.8em;
-    margin-bottom: 15px;
+    font-size: 2em; /* To hơn */
+    margin-bottom: 20px;
 }
 
 .info-card p {
     color: #555;
+    font-size: 1.05em;
+    line-height: 1.7;
 }
 
 
+/* User Reviews Section */
 .user-reviews-section {
-    padding: 50px 0;
+    padding: 80px 0;
     text-align: center;
-    background-color: var(--dark-bg);
+    background-color: var(--light-bg);
 }
 
 .user-reviews-section h2 {
-    font-size: 2.2em;
-    color: var(--secondary-color);
-    margin-bottom: 40px;
+    font-size: 2.8em;
+    color: var(--dark-secondary-color);
+    margin-bottom: 50px; /* Tăng khoảng cách */
 }
 
 .reviews-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Điều chỉnh min-width */
     gap: 30px;
 }
 
 .review-card {
     background-color: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: var(--shadow-light);
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 220px; /* Đảm bảo chiều cao tối thiểu */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 
+
 .review-card .quote {
-    font-family: serif;
-    font-size: 4em;
+    font-family: 'Times New Roman', serif; /* Font cổ điển hơn cho dấu ngoặc kép */
+    font-size: 5em; /* Lớn hơn rất nhiều */
     color: var(--primary-color);
     line-height: 0.5;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
+    margin-left: -10px; /* Dịch sang trái một chút */
+    font-weight: bold;
 }
 
 .review-card .review-text {
-    height: 80px;
-    background-color: #f0f0f0; 
-    border-radius: 5px;
+    background-color: transparent; /* Bỏ màu nền */
+    border-radius: 0; /* Bỏ bo tròn */
+    margin-bottom: 15px;
+    padding: 0; /* Bỏ padding */
+    height: auto; /* Để nội dung tự điều chỉnh chiều cao */
+    flex-grow: 1; /* Cho phép text box phát triển để chiếm không gian */
+}
+
+.review-card .review-text p {
+    font-style: italic; /* In nghiêng lời nhận xét */
+    color: #555;
+    font-size: 1.05em;
+}
+
+.reviewer-name {
+    font-weight: bold;
+    color: var(--secondary-color);
+    margin-top: 15px;
+    text-align: right; /* Căn phải tên người đánh giá */
+    font-size: 1.1em;
 }
 
 
+/* Footer */
 .main-footer {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* Màu xanh lá cây cho footer */
     color: #fff;
-    padding: 50px 0;
+    padding: 60px 0;
 }
 
 .footer-cols {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Điều chỉnh min-width */
     gap: 30px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .footer-col h3 {
-    font-size: 1.3em;
-    margin-bottom: 20px;
+    font-size: 1.5em; /* To hơn */
+    margin-bottom: 25px;
     position: relative;
+    color: var(--primary-color); /* Màu vàng nổi bật */
 }
 
 .footer-col h3::after {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -5px;
-    width: 40px;
-    height: 2px;
-    background-color: var(--primary-color);
+    bottom: -8px; /* Xuống dưới một chút */
+    width: 50px; /* Dài hơn */
+    height: 3px; /* Dày hơn */
+    background-color: #fff; /* Màu trắng */
+    border-radius: 2px;
 }
 
 .footer-col ul {
@@ -326,195 +553,277 @@ body {
 }
 
 .footer-col ul li {
-    margin-bottom: 10px;
+    margin-bottom: 12px; /* Tăng khoảng cách */
 }
 
 .footer-col ul li a {
     color: #fff;
     text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Để dùng transform */
 }
 
 .footer-col ul li a:hover {
     opacity: 1;
+    transform: translateX(5px); /* Hiệu ứng dịch sang phải */
 }
 
 .social-icons a {
     color: #fff;
-    font-size: 1.5em;
-    margin-right: 15px;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    font-size: 1.8em; /* To hơn */
+    margin-right: 20px; /* Tăng khoảng cách */
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .social-icons a:hover {
     opacity: 1;
+    transform: scale(1.1);
+    color: var(--primary-color); /* Đổi màu khi hover */
 }
 
 .copyright {
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.9;
-}
-
-.vehicle-name {
-  font-weight: 600;
-  margin: 8px 0 4px;
-  text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.3); /* Viền đậm hơn */
+    padding-top: 25px; /* Tăng padding */
+    font-size: 0.95em;
+    opacity: 0.95;
+    margin-top: 30px; /* Thêm khoảng cách */
 }
 
 
-/* Slider Section */
-/* ========== Banner Slider Section ========== */
-.banner-slider-section {
-    background-color: var(--dark-bg);
-    padding: 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    height: 80vh; /* Chiếm 80% chiều cao màn hình */
-}
-
-.slider-container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    position: relative;
-}
-
-.slider-wrapper {
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    border-radius: 0;
-}
-
-.slider-content {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    height: 100%;
-}
-
-.slider-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ảnh lấp đầy vùng slider mà không bị méo */
-    flex-shrink: 0;
-    display: block;
-    border-radius: 0;
-}
-
-/* ========== Slider Navigation Arrows ========== */
-.slider-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 1.5em;
-    border-radius: 50%;
-    z-index: 10;
-    transition: background-color 0.3s ease;
-}
-
-.slider-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.prev-arrow {
-    left: 15px;
-}
-
-.next-arrow {
-    right: 15px;
-}
-
-/* ========== Navigation Dots ========== */
-.slider-dots {
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-    text-align: center;
-}
-
-.nav-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin: 0 6px;
-    border-radius: 50%;
-    background-color: #bbb;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.nav-dot.active {
-    background-color: var(--secondary-color);
-}
-
-/* ========== Responsive ========== */
-@media (max-width: 768px) {
-    .slider-arrow {
-        padding: 6px 10px;
-        font-size: 1.2em;
-    }
-
-    .nav-dot {
-        width: 10px;
-        height: 10px;
-        margin: 0 4px;
-    }
-
-    .banner-slider-section {
-        height: 60vh; /* Trên màn nhỏ giảm chiều cao một chút */
-    }
-}
-
-@media (max-width: 480px) {
-    .slider-arrow {
-        font-size: 1em;
-    }
-
-    .banner-slider-section {
-        height: 50vh;
-    }
-}
-
-
-@media (max-width: 768px) {
-    .main-nav {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        display: none;
-        flex-direction: column;
-        padding: 15px 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .main-nav.nav-open {
-        display: flex;
-    }
-
-    .main-nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
+/* Responsive Design */
+@media (max-width: 992px) {
     .main-nav ul li {
-        margin: 10px 0;
+        margin-left: 25px;
+    }
+    .main-nav .btn-auth {
+        padding: 8px 18px;
+    }
+    .quick-search-section .search-bar-elements {
+        gap: 20px;
+        flex-direction: column; /* Xếp dọc các trường tìm kiếm trên tablet */
+        align-items: stretch;
+    }
+    .search-input-group {
+        min-width: unset;
+        width: 100%;
+    }
+    .search-button {
+        width: 100%;
+        min-width: unset;
+    }
+    .featured-vehicles h2,
+    .user-reviews-section h2 {
+        font-size: 2.4em;
+    }
+    .info-grid {
+        grid-template-columns: 1fr; /* 1 cột trên tablet */
+    }
+    .info-card, .review-card {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header .logo img {
+        height: 40px;
+    }
+
+    .slider-content img {
+    height: auto;
     }
 
     .hamburger-menu {
         display: block;
+        order: -1; /* Đẩy hamburger về bên trái */
+        margin-right: 15px;
+    }
+    .main-nav {
+        position: fixed; /* Thay đổi sang fixed để che toàn bộ màn hình */
+        top: 0;
+        left: -100%; /* Ẩn ra ngoài màn hình */
+        width: 70%; /* Chiếm 70% màn hình */
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        transition: left 0.4s ease-in-out; /* Hiệu ứng trượt vào */
+        z-index: 1001;
+    }
+    .main-nav.nav-open {
+        left: 0;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        align-items: flex-start; /* Căn trái các mục menu */
+        width: 100%;
+    }
+    .main-nav ul li {
+        margin: 15px 0; /* Tăng khoảng cách */
+        width: 100%;
+    }
+    .main-nav ul li a {
+        display: block;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color); /* Thêm đường gạch dưới cho mỗi mục */
+    }
+    .main-nav ul li:last-child a {
+        border-bottom: none;
+    }
+    .main-nav .btn-auth {
+        margin-top: 20px;
+        width: 100%; /* Nút đăng nhập full width */
+        text-align: center;
+        padding: 12px 0;
+    }
+
+    /* Overlay khi menu mở */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        display: none;
+    }
+    .main-nav.nav-open + .overlay { /* Chỉ hiển thị overlay khi nav-open */
+        display: block;
+    }
+
+    .banner-slider-section {
+        height: 55vh;
+    }
+    .slider-arrow {
+        padding: 10px;
+        font-size: 1.5em;
+        width: 40px;
+        height: 40px;
+    }
+    .prev-arrow { left: 10px; }
+    .next-arrow { right: 10px; }
+    .nav-dot {
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+    }
+
+    .quick-search-section {
+        padding: 30px 0;
+        margin-top: -60px;
+    }
+    .search-bar-elements {
+        padding: 20px;
+    }
+    .featured-vehicles, .info-sections, .user-reviews-section {
+        padding: 60px 0;
+    }
+    .featured-vehicles h2, .user-reviews-section h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    .review-card .quote {
+        font-size: 4em;
+    }
+    .main-footer {
+        padding: 40px 0;
+    }
+    .footer-cols {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
 }
 
+@media (max-width: 480px) {
+    .main-header .logo img {
+        height: 35px;
+    }
+
+    .slider-content img {
+    height: auto;
+    object-fit: contain;
+    }
+
+    .hamburger-menu {
+        font-size: 1.6em;
+    }
+    .main-nav {
+        width: 80%; /* Chiếm nhiều hơn trên màn hình rất nhỏ */
+    }
+
+    .banner-slider-section {
+        height: 45vh;
+    }
+    .slider-arrow {
+        font-size: 1.2em;
+        padding: 8px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .quick-search-section {
+        margin-top: -40px;
+    }
+    .search-bar-elements {
+        padding: 15px;
+    }
+    .search-input-group label {
+        margin-bottom: 5px;
+    }
+    .search-input-group select,
+    .search-input-group input,
+    .search-button {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+
+    .featured-vehicles, .info-sections, .user-reviews-section {
+        padding: 40px 0;
+    }
+    .featured-vehicles h2, .user-reviews-section h2 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+    .vehicle-item img {
+        width: 100px;
+        height: 100px;
+    }
+    .vehicle-name {
+        font-size: 1.1em;
+    }
+    .vehicle-item .price {
+        font-size: 1.15em;
+    }
+
+    .info-card h3 {
+        font-size: 1.6em;
+    }
+    .info-card p {
+        font-size: 0.95em;
+    }
+    .review-card .quote {
+        font-size: 3.5em;
+    }
+    .review-card .review-text p {
+        font-size: 0.95em;
+    }
+    .reviewer-name {
+        font-size: 1em;
+    }
+
+    .footer-cols {
+        grid-template-columns: 1fr; /* Mỗi cột 1 hàng trên màn hình rất nhỏ */
+        text-align: center;
+    }
+    .footer-col h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    .social-icons {
+        margin-top: 20px;
+    }
+}

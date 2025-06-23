@@ -15,7 +15,8 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="logo">
-                <img src="img/img1.jpg" alt="GOZI Logo"> </div>
+                <img src="img/img1.jpg" alt="GOZI Logo"> 
+            </div>
             <nav class="main-nav">
                 <ul>
                     <li><a href="login.html">Tìm xe</a></li>
@@ -75,7 +76,7 @@
 
     <section class="featured-vehicles">
         <div class="container">
-            <h2>Xe nổi bật tại Huế <span class="arrow-icon"></span></h2> 
+            <h2>Xe nổi bật tại Huế <span class="arrow-icon">▶</span></h2> 
             <div class="vehicle-list">
 
                 <div class="vehicle-item">
@@ -86,28 +87,40 @@
                     <p class="price">150.000đ/ngày</p> 
                 </div>
 
-                <div class="vehicle-item">
+                <!-- <div class="vehicle-item">
                     <a href="login.html">
-                    <img src="img/vision.png" alt="Xe Yamaha Exciter">
-                    </a>
+                    <img src="img/exciter.png" alt="Xe Yamaha Exciter"> </a>
                     <p class="vehicle-name">Yamaha Exciter</p>
-                    <p class="price">150.000đ/ngày</p> 
-                </div>
+                    <p class="price">180.000đ/ngày</p> </div> -->
 
-                <div class="vehicle-item">
+                <!-- <div class="vehicle-item">
                     <a href="login.html">
                     <img src="img/blade.jpg" alt="Xe ga Air Blade">
                     </a>
                     <p class="vehicle-name">Air Blade</p>
-                    <p class="price">150.000đ/ngày</p> 
-                </div>
+                    <p class="price">170.000đ/ngày</p> 
+                </div> -->
 
                 <div class="vehicle-item">
                     <a href="login.html">
                     <img src="img/sirius.jpg" alt="Xe Số Sirius">
                     </a>
                     <p class="vehicle-name">Sirius</p>
-                    <p class="price">150.000đ/ngày</p> 
+                    <p class="price">130.000đ/ngày</p> 
+                </div>
+                 <div class="vehicle-item">
+                    <a href="login.html">
+                    <img src="img/xe/Honda SH Mode.jpg" alt="Honda SH Mode"> 
+                    </a>
+                    <p class="vehicle-name">Honda SH Mode</p>
+                    <p class="price">200.000đ/ngày</p> 
+                </div>
+                <div class="vehicle-item">
+                    <a href="login.html">
+                    <img src="img/xe/winner x.jpg" alt="Winner X">
+                    </a>
+                    <p class="vehicle-name">Winner X</p>
+                    <p class="price">180.000đ/ngày</p> 
                 </div>
 
             </div>
@@ -119,11 +132,11 @@
             <div class="info-grid">
                 <div class="info-card">
                     <h3>Hướng dẫn thuê xe</h3> 
-                    <p>Nội dung hướng dẫn thuê xe của GOZI, giúp khách hàng dễ dàng làm quen với quy trình thuê.</p>
+                    <p>Nội dung hướng dẫn thuê xe của GOZI, giúp khách hàng dễ dàng làm quen với quy trình thuê xe một cách nhanh chóng và hiệu quả.</p>
                 </div>
                 <div class="info-card">
                     <h3>Ưu điểm nền tảng</h3> 
-                    <p>Khám phá những lợi ích nổi bật khi sử dụng dịch vụ của GOZI, từ sự đa dạng xe đến hỗ trợ 24/7.</p>
+                    <p>Khám phá những lợi ích nổi bật khi sử dụng dịch vụ của GOZI: đa dạng xe, giá cả cạnh tranh, và hỗ trợ khách hàng 24/7.</p>
                 </div>
             </div>
         </div>
@@ -138,12 +151,21 @@
                     <div class="review-text">
                         <p>Dịch vụ rất tuyệt vời, xe mới và sạch sẽ. Chủ xe nhiệt tình hỗ trợ. Chắc chắn sẽ sử dụng lại!</p>
                     </div>
+                    <p class="reviewer-name">- Nguyễn Văn A</p>
                 </div>
                 <div class="review-card">
                     <p class="quote">“</p>
                     <div class="review-text">
                         <p>Thao tác đặt xe nhanh chóng, tiện lợi. Rất hài lòng với chuyến đi của mình tại Huế nhờ GOZI.</p>
                     </div>
+                    <p class="reviewer-name">- Trần Thị B</p>
+                </div>
+                <div class="review-card">
+                    <p class="quote">“</p>
+                    <div class="review-text">
+                        <p>Gozi thực sự giúp tôi tìm được chiếc xe ưng ý chỉ trong vài phút. Giá tốt và thủ tục đơn giản.</p>
+                    </div>
+                    <p class="reviewer-name">- Lê Văn C</p>
                 </div>
             </div>
         </div>
@@ -247,7 +269,7 @@
             }
 
             function startAutoplay() {
-                slideInterval = setInterval(nextSlide, 2000); // Tự động chuyển slide mỗi 3 giây
+                slideInterval = setInterval(nextSlide, 3000); // Tự động chuyển slide mỗi 3 giây
             }
 
             function stopAutoplay() {

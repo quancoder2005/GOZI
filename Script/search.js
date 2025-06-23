@@ -101,24 +101,32 @@ function renderPagination() {
   }
 }
 
+
 function filterVehicles() {
   const carType = document.getElementById("car-type")?.value || "";
+  const vehicleTypeChecks = Array.from(document.querySelectorAll('input[name="vehicle_type"]:checked')).map(cb => cb.value);
   const maxPrice = parseInt(priceRange?.value || "1000000");
   const maxDistance = parseInt(distanceRange?.value || "100");
   const starChecks = Array.from(document.querySelectorAll('input[name="star_rating"]:checked')).map(cb => parseFloat(cb.value));
   const amenityChecks = Array.from(document.querySelectorAll('input[name="amenity"]:checked')).map(cb => cb.value);
+  const locationInput = document.getElementById("location")?.value.trim().toLowerCase();
 
   filteredVehicles = vehicles.filter(vehicle => {
     if (carType && carType !== "all" && vehicle.type !== carType) return false;
+    if (vehicleTypeChecks.length > 0 && !vehicleTypeChecks.includes(vehicle.type)) return false;
     if (vehicle.price > maxPrice) return false;
     if (vehicle.distance > maxDistance) return false;
     if (starChecks.length > 0 && !starChecks.some(star => vehicle.rating >= star)) return false;
     if (amenityChecks.length > 0 && !amenityChecks.every(am => vehicle.amenities.includes(am))) return false;
+    if (locationInput && !vehicle.location.toLowerCase().includes(locationInput)) return false;
     return true;
   });
 
-  // 👉 Đây là dòng bạn cần thêm để sửa lỗi trang 2/3/4
+  // 👉 Đảm bảo reset về trang đầu khi lọc
   // currentPage = 1;
+
+  filteredVehicles.sort((a, b) => b.price - a.price);
+
 
   renderVehicles();
   renderPagination();
@@ -147,11 +155,29 @@ document.addEventListener("DOMContentLoaded", () => {
     renderPagination();
   }
 
-document.querySelector(".search-button")?.addEventListener("click", () => {
-  currentPage = 1; // ✅ Chỉ reset về trang 1 khi người dùng bấm nút “Tìm kiếm”
-  filterVehicles();
-});
+  document.querySelector(".search-button")?.addEventListener("click", () => {
+    currentPage = 1;
+    filterVehicles();
+  });
 
+  document.querySelector(".clear-filters-btn")?.addEventListener("click", () => {
+    document.getElementById("car-type").value = "";
+    priceRange.value = 100000;
+    priceValue.textContent = new Intl.NumberFormat("vi-VN").format(priceRange.value);
+    distanceRange.value = 10;
+    distanceValue.textContent = distanceRange.value;
+
+    document.querySelectorAll('input[name="star_rating"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('input[name="amenity"]').forEach(cb => cb.checked = false);
+    document.querySelectorAll('input[name="vehicle_type"]').forEach(cb => cb.checked = false);
+
+    currentPage = 1;
+    filteredVehicles = [...vehicles];
+    localStorage.removeItem("filterState");
+
+    renderVehicles();
+    renderPagination();
+  });
 
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("detail-btn")) {

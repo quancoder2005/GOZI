@@ -32,8 +32,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       if (username === 'admin' && password === '1234') {
+        alert('✅ Đăng nhập Admin thành công!');
+        window.location.href = 'Admin.html';
+      } else if (username === 'quan' && password === '1234') {
         alert('✅ Đăng nhập thành công!');
-        window.location.href = 'main.html';  // 👉 Chuyển đến trang chính
+        window.location.href = 'main.html';
       } else {
         loginError.textContent = '❌ Sai tài khoản hoặc mật khẩu.';
       }
