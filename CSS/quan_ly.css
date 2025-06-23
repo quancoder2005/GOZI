@@ -11,7 +11,9 @@
     --card-bg: #ffffff; /* Nền thẻ */
     --border-color: #e9ecef; /* Đường viền */
     --shadow-light: rgba(0, 0, 0, 0.05);
+
 }
+
 
 /* Base Styles */
 * {
@@ -60,15 +62,17 @@ body.no-scroll {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #2C3E50;
     /* Đảo ngược thứ tự cho desktop để logo bên phải, toggle bên trái */
     flex-direction: row-reverse;
     border-bottom: 1px solid var(--border-color);
+    
 }
 
 .sidebar-header .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: white;
     text-decoration: none;
     white-space: nowrap;
     overflow: hidden;
@@ -120,7 +124,7 @@ body.no-scroll {
 .main-menu {
     flex-grow: 1; /* Chiếm hết không gian còn lại */
     padding: 20px 0;
-    background-color: #343a40;
+    background-color: #2C3E50;
     
     
 }
@@ -134,18 +138,18 @@ body.no-scroll {
     padding: 15px 20px;
     display: flex;
     align-items: center;
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     white-space: nowrap;
-    overflow: hidden; /* Ẩn phần bị tràn khi thu gọn */
+    overflow: hidden; /* Hide overflowing text when collapsed */
 }
 
 .main-menu .menu-item i {
     margin-right: 15px;
-    font-size: 1.2rem;
-    color: var(--secondary-color);
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
     transition: margin-right 0.3s ease, font-size 0.3s ease;
 }
 

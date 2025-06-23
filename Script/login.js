@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (username === 'admin' && password === '1234') {
         alert('✅ Đăng nhập Admin thành công!');
         window.location.href = 'Admin.html';
-      } else if (username === 'tuan123' && password === '1234') {
+      } else if (username === 'tuan' && password === '1234') {
         alert('✅ Đăng nhập thành công!');
         window.location.href = 'main.html';
-      } else if (username === 'tuan' && password === '1234') {
+      } else if (username === 'tuan12345' && password === '1234') {
         alert('✅ Đăng nhập thành công!');
         window.location.href = 'quan_ly.html';
       } else {
