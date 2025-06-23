@@ -18,9 +18,8 @@
     <!-- Form Đăng Nhập -->
     <div id="login-form" class="auth-form active">
       <h2>Đăng Nhập</h2>
-      <div id="login-error" class="error-message"></div> <!-- ✅ THÊM DÒNG NÀY -->
+      <div id="login-error" class="error-message"></div>
       <form id="loginForm">
-        
         <div class="input-group">
           <label for="login-email">Email hoặc Tên đăng nhập</label>
           <input type="text" id="login-email" placeholder="Nhập email hoặc tên đăng nhập của bạn" required>
@@ -49,7 +48,7 @@
     <!-- Form Đăng Ký -->
     <div id="register-form" class="auth-form">
       <h2>Đăng Ký</h2>
-      <div id="register-error" class="error-message"></div> <!-- ✅ THÊM DÒNG NÀY -->
+      <div id="register-error" class="error-message"></div>
       <form id="registerForm">
         <div class="input-group">
           <label for="register-email">Email</label>
@@ -60,6 +59,14 @@
           <input type="text" id="register-username" placeholder="Tên đăng nhập của bạn" required>
         </div>
         <div class="input-group">
+          <label for="register-role">Bạn là</label>
+          <select id="register-role" required>
+            <option value="">-- Chọn vai trò --</option>
+            <option value="khach-thue">Khách thuê</option>
+            <option value="chu-xe">Chủ xe</option>
+          </select>
+        </div>
+        <div class="input-group">
           <label for="register-password">Mật khẩu</label>
           <input type="password" id="register-password" placeholder="Tạo mật khẩu" required>
         </div>
@@ -67,7 +74,6 @@
           <label for="register-confirm-password">Xác nhận mật khẩu</label>
           <input type="password" id="register-confirm-password" placeholder="Nhập lại mật khẩu" required>
         </div>
-        
         <button type="submit" class="auth-button">Đăng Ký</button>
       </form>
       <div class="social-login">

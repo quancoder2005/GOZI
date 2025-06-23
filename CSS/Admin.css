@@ -1,19 +1,20 @@
-/* CSS/admin-dashboard.css */
+/* CSS/Admin.css */
 
-/* Variables (có thể dùng chung với các file CSS khác) */
+/* Variables */
 :root {
-    --primary-color: #800080; /* Màu xanh admin chủ đạo */
-    --secondary-color: #7f8c8d; /* Xám phụ */
-    --accent-color: #2ecc71; /* Xanh lá (vd: nút thêm mới) */
-    --danger-color: #e74c3c; /* Đỏ (vd: nút xóa) */
-    --warning-color: #f39c12; /* Cam (vd: trạng thái chờ) */
-    --text-color: #2c3e50; /* Đen đậm */
-    --light-bg: #ecf0f1; /* Nền nhạt */
-    --card-bg: #ffffff; /* Nền thẻ */
-    --border-color: #dde1e6; /* Đường viền */
+    --primary-color: #800080; /* Purple */
+    --secondary-color: #7f8c8d; /* Grey */
+    --accent-color: #2ecc71; /* Green */
+    --danger-color: #e74c3c; /* Red */
+    --warning-color: #f39c12; /* Orange */
+    --text-color: #2c3e50; /* Dark Blue/Grey */
+    --light-bg: #ecf0f1; /* Light Grey Background */
+    --card-bg: #ffffff; /* White Card Background */
+    --border-color: #dde1e6; /* Light Grey Border */
     --shadow-light: rgba(0, 0, 0, 0.08);
 }
 
+/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -25,33 +26,43 @@ body {
     background-color: var(--light-bg);
     color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll due to sidebar transitions */
+}
+
+/* Prevent body scroll when sidebar is open on mobile */
+body.no-scroll {
+    overflow: hidden;
 }
 
 .dashboard-container {
     display: flex;
     min-height: 100vh;
+    position: relative; /* Needed for sidebar overlay on mobile */
 }
 
 /* Sidebar */
 .sidebar {
-    width: 280px; /* Rộng hơn một chút cho admin */
-    background-color: var(--text-color); /* Nền tối hơn */
+    width: 280px;
+    background-color: var(--text-color);
     box-shadow: 2px 0 8px var(--shadow-light);
     display: flex;
     flex-direction: column;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, transform 0.3s ease; /* Add transform for mobile */
     z-index: 100;
 }
 
+/* Sidebar - Collapsed State (Desktop) */
 .sidebar.collapsed {
-    width: 80px; /* Chiều rộng khi thu gọn */
+    width: 80px;
 }
 
+/* Sidebar Header */
 .sidebar-header {
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-direction: row-reverse; /* Logo on right, toggle button on left */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -69,8 +80,10 @@ body {
     font-size: 0;
     width: 0;
     padding: 0;
+    margin-left: -20px; /* Adjust if needed to completely hide */
 }
 
+/* Toggle Sidebar Button - General Styling */
 .toggle-sidebar-btn {
     background: none;
     border: none;
@@ -78,9 +91,35 @@ body {
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     padding: 5px;
-    display: block;
+    display: block; /* Ensure it's always block by default */
+    transition: color 0.2s ease;
 }
 
+.toggle-sidebar-btn:hover {
+    color: white;
+}
+
+/* Specific styling for the desktop toggle button (inside sidebar) */
+#desktopToggleSidebarBtn {
+    /* Styles for the button inside the sidebar */
+    display: block; /* Visible by default on desktop */
+}
+
+/* Specific styling for the mobile-only fixed toggle button */
+#mobileToggleSidebarBtn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    color: var(--primary-color); /* Contrasting color for main content area */
+    background-color: var(--card-bg); /* Add background to make it stand out */
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    z-index: 103; /* Highest z-index */
+    display: none; /* Hidden by default, shown only on mobile */
+}
+
+/* Main Menu */
 .main-menu {
     flex-grow: 1;
     padding: 20px 0;
@@ -99,15 +138,17 @@ body {
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     white-space: nowrap;
+    overflow: hidden; /* Hide overflowing text when collapsed */
 }
 
 .main-menu .menu-item i {
     margin-right: 15px;
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.6);
-    transition: margin-right 0.3s ease;
+    transition: margin-right 0.3s ease, font-size 0.3s ease;
 }
 
+/* Main Menu - Collapsed State */
 .sidebar.collapsed .main-menu .menu-item i {
     margin-right: 0;
     font-size: 1.4rem;
@@ -118,8 +159,8 @@ body {
     padding: 15px 0;
 }
 
-.sidebar.collapsed .main-menu .menu-item:not(.active) span {
-    display: none;
+.sidebar.collapsed .main-menu .menu-item span { /* Target the text */
+    display: none; /* Hide text when collapsed */
 }
 
 .main-menu .menu-item:hover,
@@ -137,6 +178,7 @@ body {
 .main-content {
     flex-grow: 1;
     padding: 30px;
+    transition: margin-left 0.3s ease; /* For desktop sidebar transition */
 }
 
 .main-content-header {
@@ -160,7 +202,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 15px var(--shadow-light);
     margin-bottom: 30px;
-    display: none;
+    display: none; /* Hidden by default, shown by JS */
 }
 
 .dashboard-section.active {
@@ -260,7 +302,7 @@ table {
     margin-top: 15px;
     background-color: var(--card-bg);
     border-radius: 8px;
-    overflow: hidden; /* Để border-radius hoạt động với thead/tbody */
+    overflow: hidden;
 }
 
 table th,
@@ -286,7 +328,7 @@ table tbody tr:hover {
     background-color: var(--light-bg);
 }
 
-/* Status Badges (example) */
+/* Status Badges */
 .status-active, .status-pending, .status-completed {
     padding: 5px 10px;
     border-radius: 4px;
@@ -298,26 +340,84 @@ table tbody tr:hover {
 .status-pending { background-color: #fff3cd; color: #ffc107; } /* Yellow */
 .status-completed { background-color: #d1ecf1; color: #17a2b8; } /* Blue */
 
+/* Sidebar Overlay for Mobile */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 99; /* Below sidebar, above main content */
+    opacity: 0;
+    visibility: hidden; /* Hide completely when not active */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 
-/* Responsive */
-@media (max-width: 992px) {
-    .sidebar {
-        width: 70px; /* Luôn thu gọn trên tablet và mobile */
-    }
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
 
-    .sidebar.collapsed .sidebar-header .logo {
-        font-size: 0;
-    }
-    .sidebar.collapsed .main-menu .menu-item:not(.active) span {
+
+/* Responsive Design */
+
+/* Desktop / Tablet Large */
+@media (min-width: 993px) {
+    /* Hide the mobile-only toggle button on desktop */
+    #mobileToggleSidebarBtn {
         display: none;
     }
-    .sidebar.collapsed .main-menu .menu-item i {
-        margin-right: 0;
+
+    /* Show the desktop toggle button */
+    #desktopToggleSidebarBtn {
+        display: block;
+        color: rgba(255, 255, 255, 0.7); /* Reset color for desktop sidebar button */
+        background: none;
+        box-shadow: none;
+    }
+}
+
+
+/* Tablet Small / Mobile Landscape */
+@media (max-width: 992px) {
+    /* On smaller tablets, always start with sidebar collapsed (can be changed by JS) */
+    .sidebar {
+        width: 80px; /* Default collapsed width */
+    }
+
+    .sidebar .main-menu .menu-item span {
+        display: none; /* Hide text on smaller screens when sidebar is 'collapsed' by default */
+    }
+
+    .sidebar .main-menu .menu-item i {
+        margin-right: 0; /* Center icon */
         font-size: 1.4rem;
     }
-    .sidebar.collapsed .main-menu .menu-item {
+
+    .sidebar .main-menu .menu-item {
         justify-content: center;
         padding: 15px 0;
+    }
+
+    .sidebar-header .logo {
+        font-size: 0;
+        width: 0;
+        padding: 0;
+        margin-left: -20px; /* Ensure logo is hidden */
+    }
+
+    /* Hide the mobile-only toggle button here if desktopToggleSidebarBtn is used for small desktop */
+    #mobileToggleSidebarBtn {
+        display: none;
+    }
+
+    /* Ensure desktop toggle button is visible to collapse/expand */
+    #desktopToggleSidebarBtn {
+        display: block;
+        color: rgba(255, 255, 255, 0.7); /* Reset color for desktop sidebar button */
+        background: none;
+        box-shadow: none;
     }
 
     .main-content {
@@ -329,109 +429,136 @@ table tbody tr:hover {
     }
 }
 
+
+/* Mobile Portrait */
 @media (max-width: 768px) {
     .dashboard-container {
         flex-direction: column;
     }
 
     .sidebar {
-        width: 100%;
-        height: auto;
-        box-shadow: 0 2px 5px var(--shadow-light);
-        position: static;
-        flex-direction: row; /* Sidebar items in a row on mobile header */
-        justify-content: space-between;
+        width: 280px; /* Full width when open on mobile */
+        height: 100vh;
+        position: fixed; /* Fixed position for mobile slide-in */
+        top: 0;
+        left: 0;
+        transform: translateX(-100%); /* Hidden off-screen initially */
+        z-index: 101; /* Above main content and overlay */
         padding-bottom: 0;
+        box-shadow: none; /* Shadow handled by overlay */
+    }
+
+    .sidebar.nav-open {
+        transform: translateX(0); /* Slide in when nav-open class is added */
+    }
+
+    /* Important: When sidebar is open on mobile, main-menu items should show text */
+    .sidebar.nav-open .main-menu .menu-item span {
+        display: inline; /* Show text */
+    }
+
+    .sidebar.nav-open .main-menu .menu-item i {
+        margin-right: 15px; /* Restore margin */
+        font-size: 1.1rem; /* Restore icon size */
+    }
+
+    .sidebar.nav-open .main-menu .menu-item {
+        justify-content: flex-start; /* Align items to start */
+        padding: 15px 20px; /* Restore padding */
     }
 
     .sidebar-header {
-        border-bottom: none;
-        width: auto;
+        padding: 15px 20px;
+        flex-direction: row-reverse; /* Keep toggle button on left, title on right for mobile header */
     }
 
-    .sidebar .main-menu {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease-out;
-        flex-basis: 100%; /* Menu takes full width below header on open */
+    /* Hide logo when sidebar is open on mobile */
+    .sidebar.nav-open .sidebar-header .logo {
+        font-size: 0;
+        width: 0;
         padding: 0;
+        margin-left: -20px;
     }
 
-    .sidebar.nav-open .main-menu {
-        max-height: 350px; /* Enough to show all menu items */
-        padding: 10px 0;
+    /* Hide the desktop toggle button when on mobile (it's inside the sidebar) */
+    #desktopToggleSidebarBtn {
+        display: none;
     }
 
+    /* Show the mobile-only fixed toggle button */
+    #mobileToggleSidebarBtn {
+        display: block; /* Show this button on mobile */
+    }
+    
+    /* When sidebar is open (body.no-scroll), hide the fixed mobile toggle button */
+    body.no-scroll #mobileToggleSidebarBtn {
+        display: none; 
+    }
+
+    /* Override collapsed styles for mobile to ensure full sidebar behavior */
+    .sidebar.collapsed {
+        width: 280px; /* Prevents it from collapsing on mobile */
+        transform: translateX(-100%); /* Keeps it hidden if not nav-open */
+    }
+    
+    /* Ensure text is shown if .collapsed is mistakenly applied on mobile */
+    .sidebar.collapsed .main-menu .menu-item span {
+        display: inline;
+    }
+    .sidebar.collapsed .main-menu .menu-item i {
+        margin-right: 15px;
+        font-size: 1.1rem;
+    }
+    .sidebar.collapsed .main-menu .menu-item {
+        justify-content: flex-start;
+        padding: 15px 20px;
+    }
     .sidebar.collapsed .sidebar-header .logo {
         font-size: 1.6rem;
         width: auto;
         padding: 0;
+        margin-left: 0;
     }
 
-    .main-menu ul {
-        display: flex;
-        flex-direction: column; /* Items stack vertically when menu is open */
-    }
-
-    .main-menu .menu-item {
-        justify-content: flex-start;
-        padding: 12px 15px;
-        color: var(--text-color); /* Màu chữ tối trên nền sáng khi menu mở */
-    }
-
-    .main-menu .menu-item i {
-        margin-right: 15px;
-        color: var(--secondary-color);
-    }
-
-    .main-menu .menu-item:hover,
-    .main-menu .menu-item.active {
-        background-color: var(--light-bg);
-        color: var(--primary-color);
-    }
-    .main-menu .menu-item:hover i,
-    .main-menu .menu-item.active i {
-        color: var(--primary-color);
-    }
-
-
-    .toggle-sidebar-btn {
-        display: block; /* Luôn hiển thị */
-        order: 1; /* Di chuyển nút toggle về cuối header */
-        margin-left: 15px;
-        color: var(--primary-color);
-    }
-
-    .sidebar-header .logo {
-        order: 0; /* Giữ logo ở đầu */
-    }
 
     .main-content {
         padding: 15px;
+        width: 100%;
     }
 
     .main-content-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+        margin-top: 60px; /* Make space for the fixed mobile toggle button */
     }
 
     .section-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 15px;
+        gap: 10px;
     }
 
     .add-new-btn {
         width: 100%;
         justify-content: center;
     }
-    table th, table td {
+
+    table th,
+    table td {
         padding: 8px 10px;
         font-size: 0.9rem;
     }
+
+    /* Sidebar overlay activation */
+    /* This selector is critical for the overlay to show when 'nav-open' is on sidebar */
+    .sidebar.nav-open ~ .sidebar-overlay { /* Use general sibling combinator if overlay is not direct sibling */
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
+/* Extra Small Screens */
 @media (max-width: 480px) {
     .main-content {
         padding: 10px;
@@ -443,6 +570,6 @@ table tbody tr:hover {
         font-size: 1.3rem;
     }
     .stats-grid {
-        grid-template-columns: 1fr; /* Một cột trên màn hình rất nhỏ */
+        grid-template-columns: 1fr;
     }
 }

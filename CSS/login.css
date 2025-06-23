@@ -162,6 +162,28 @@ body {
   color: white;
 }
 
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1em;
+  background-color: #fff;
+  color: var(--text-color);
+  appearance: none; /* Ẩn giao diện mặc định */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+}
+
+.input-group select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+  outline: none;
+}
+
+
 .error-message {
   color: red;
   margin-bottom: 10px;
